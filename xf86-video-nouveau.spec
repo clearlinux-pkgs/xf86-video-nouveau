@@ -4,7 +4,7 @@
 #
 Name     : xf86-video-nouveau
 Version  : 1.0.15
-Release  : 2
+Release  : 3
 URL      : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.15.tar.gz
 Source0  : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.15.tar.gz
 Summary  : No detailed summary available
@@ -47,7 +47,9 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1494583758
+export SOURCE_DATE_EPOCH=1494585580
+export CFLAGS="-O3 -g -fopt-info-vec "
+unset LDFLAGS
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -59,7 +61,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1494583758
+export SOURCE_DATE_EPOCH=1494585580
 rm -rf %{buildroot}
 %make_install
 
