@@ -4,7 +4,7 @@
 #
 Name     : xf86-video-nouveau
 Version  : 1.0.15
-Release  : 5
+Release  : 6
 URL      : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.15.tar.gz
 Source0  : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.15.tar.gz
 Summary  : No detailed summary available
