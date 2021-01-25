@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xB178BE4EA075DE07 (imirkin@alum.mit.edu)
 #
 Name     : xf86-video-nouveau
-Version  : 1.0.16
-Release  : 45
-URL      : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.16.tar.gz
-Source0  : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.16.tar.gz
-Source99 : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.16.tar.gz.sig
-Summary  : Open Source 2D acceleration driver for nVidia cards
+Version  : 1.0.17
+Release  : 46
+URL      : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.17.tar.gz
+Source0  : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.17.tar.gz
+Source1  : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.17.tar.gz.sig
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : MIT
 Requires: xf86-video-nouveau-lib = %{version}-%{release}
@@ -55,31 +55,37 @@ man components for the xf86-video-nouveau package.
 
 
 %prep
-%setup -q -n xf86-video-nouveau-1.0.16
+%setup -q -n xf86-video-nouveau-1.0.17
+cd %{_builddir}/xf86-video-nouveau-1.0.17
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1548778346
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1611601010
+export GCC_IGNORE_WERROR=1
 export CFLAGS="-O3 -g -fopt-info-vec "
 unset LDFLAGS
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1548778346
+export SOURCE_DATE_EPOCH=1611601010
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xf86-video-nouveau
-cp COPYING %{buildroot}/usr/share/package-licenses/xf86-video-nouveau/COPYING
+cp %{_builddir}/xf86-video-nouveau-1.0.17/COPYING %{buildroot}/usr/share/package-licenses/xf86-video-nouveau/b6e9e05950ebcd16852fe9795b564a3f5d976223
 %make_install
 
 %files
@@ -91,7 +97,7 @@ cp COPYING %{buildroot}/usr/share/package-licenses/xf86-video-nouveau/COPYING
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/xf86-video-nouveau/COPYING
+/usr/share/package-licenses/xf86-video-nouveau/b6e9e05950ebcd16852fe9795b564a3f5d976223
 
 %files man
 %defattr(0644,root,root,0755)
