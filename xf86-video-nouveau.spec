@@ -6,7 +6,7 @@
 #
 Name     : xf86-video-nouveau
 Version  : 1.0.17
-Release  : 50
+Release  : 51
 URL      : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.17.tar.gz
 Source0  : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.17.tar.gz
 Source1  : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.17.tar.gz.sig
@@ -25,6 +25,8 @@ BuildRequires : pkgconfig(xextproto)
 BuildRequires : pkgconfig(xorg-macros)
 BuildRequires : pkgconfig(xorg-server)
 BuildRequires : pkgconfig(xproto)
+Patch1: 0001-nouveau-fixup-driver-for-new-X-server-ABI.patch
+Patch2: 0002-remove-sarea.h-usage.patch
 
 %description
 No detailed description available
@@ -57,13 +59,15 @@ man components for the xf86-video-nouveau package.
 %prep
 %setup -q -n xf86-video-nouveau-1.0.17
 cd %{_builddir}/xf86-video-nouveau-1.0.17
+%patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1611601010
+export SOURCE_DATE_EPOCH=1637260449
 export GCC_IGNORE_WERROR=1
 export CFLAGS="-O3 -g -fopt-info-vec "
 unset LDFLAGS
@@ -82,7 +86,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1611601010
+export SOURCE_DATE_EPOCH=1637260449
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xf86-video-nouveau
 cp %{_builddir}/xf86-video-nouveau-1.0.17/COPYING %{buildroot}/usr/share/package-licenses/xf86-video-nouveau/b6e9e05950ebcd16852fe9795b564a3f5d976223
