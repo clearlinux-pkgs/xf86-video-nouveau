@@ -6,7 +6,7 @@
 #
 Name     : xf86-video-nouveau
 Version  : 1.0.17
-Release  : 168
+Release  : 169
 URL      : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.17.tar.gz
 Source0  : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.17.tar.gz
 Source1  : https://www.x.org/releases/individual/driver/xf86-video-nouveau-1.0.17.tar.gz.sig
